@@ -38,20 +38,20 @@ console.log(products)
       </header>
       <main>
         <Cart cartItems={cartItems}/>
-        {products.map((product) =>
-         <ProductCard 
-          key={product.id}
-          image={product.image}
-          title={product.title} 
-          description={product.description}
-          rating={product.rating}
-          price={product.price}
-          
-          setCartItems={setCartItems}
-          cartItems={cartItems}
-          />  )} 
-        
-
+        <div className='test123'>
+          {products.map((product) =>
+          <ProductCard 
+            key={product.id}
+            image={product.image}
+            title={product.title} 
+            description={product.description}
+            rating={product.rating}
+            price={product.price}
+            
+            setCartItems={setCartItems}
+            cartItems={cartItems}
+            />  )} 
+        </div>
       </main>
 
     </div>
