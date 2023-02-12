@@ -1,60 +1,47 @@
-import './App.css';
-import { useEffect, useState } from 'react';
-import ProductCard from './components/ProductCard';
-import Cart from './components/Cart';
+import React,{useState} from 'react';
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  RouterProvider,
+  Route,
+  
+} from "react-router-dom";
 
-const productObj = {
-  "id": 1,
-  "title": "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
-  "price": 109.95,
-  "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
-  "category": "men's clothing",
-  "image": "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
-  "rating": {
-      "rate": 3.9,
-      "count": 120
-  }
-}
+import RootLayout from './layouts/RootLayout';
+import About from './pages/About';
+import Cart from './pages/Cart';
+import Home from './pages/Home';
+
+import ProductPage from './pages/Product.js'
+
 
 function App() {
-  const [products, setProducts] = useState([]);
+  const [cartItems, setCartItems] = useState([])
+  // const [cartCounter, setCartCounter] = useState(0);
 
+  function addItem(item) {
+    setCartItems([ ...cartItems, item  ])
+  }
 
+  function removeItem(item) {
+    setCartItems(cartItems.filter((itm) => itm !== item))
+  }
 
-  useEffect(() => { 
-    fetch('https://fakestoreapi.com/products')
-      .then(res=>res.json())
-      .then(json=> setProducts(json))}
-      ,[])
-
-console.log(products)
-  const [cartItems, setCartItems] = useState(0)
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <Route path="/" element={<RootLayout cartCounter={cartItems.length} />}>
+        <Route index element={<Home cartItems={cartItems} setCartItems={setCartItems} addItem={addItem} removeItem={removeItem}/>} />
+        <Route path="about" element={<About />} /> 
+        <Route path="cart" element={<Cart cartItems={cartItems} removeItem={removeItem}/>} /> 
+  
+        <Route path="product/:id" element={<ProductPage/>} /> 
+  
+      </Route>
+    )
+  ) 
   
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1 className='logo'>no-brand</h1>
-        <hr />
-      </header>
-      <main>
-        <Cart cartItems={cartItems}/>
-        <div className='test123'>
-          {products.map((product) =>
-          <ProductCard 
-            key={product.id}
-            image={product.image}
-            title={product.title} 
-            description={product.description}
-            rating={product.rating}
-            price={product.price}
-            
-            setCartItems={setCartItems}
-            cartItems={cartItems}
-            />  )} 
-        </div>
-      </main>
-
-    </div>
+    <RouterProvider router={router} />
   );
 }
 
