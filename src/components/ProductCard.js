@@ -1,6 +1,6 @@
 import React from 'react' 
 import { NavLink } from 'react-router-dom'
-import { Rating } from 'react-simple-star-rating'
+// import { Rating } from 'react-simple-star-rating'
 
 
 
@@ -30,12 +30,12 @@ export default function ProductCard({product,addItem, removeItem}) {
                     touchAction: 'none'
                   }}>
                     
-                  <Rating
+                  {/* <Rating
                     initialValue={product.rating}
                     onClick={function noRefCheck(){}}
                     readonly
                     size={12}
-                    />
+                    /> */}
                     {/* <p> 
                     {props.rating.count}
                     </p> */}

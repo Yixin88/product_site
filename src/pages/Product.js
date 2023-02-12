@@ -1,6 +1,6 @@
 import React, { useEffect,useState } from "react"
 import { useParams } from "react-router-dom"
-import { Rating } from 'react-simple-star-rating'
+// import { Rating } from 'react-simple-star-rating'
 
 
 
@@ -40,12 +40,12 @@ return (
                     direction: 'ltr',
                     fontFamily: 'sans-serif',
                     touchAction: 'none'}}>
-                    <Rating
+                    {/* <Rating
                     initialValue={product.rating.rate}
                     onClick={function noRefCheck(){}}
                     readonly
                     size={12}
-                    />
+                    /> */}
                     {/* <p> 
                     {props.rating.count}
                     </p> */}
